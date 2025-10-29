@@ -142,15 +142,6 @@
             text-transform: capitalize;
         }
         
-        /* Iframe Styles */
-        .items-iframe {
-            width: 100%;
-            height: 65vh; /* 65% of the viewport height */
-            border: none;
-            border-radius: 10px;
-        }
-
-
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .trade-text { font-size: 2.5em; }
@@ -166,7 +157,8 @@
         <!-- Tab Navigation -->
         <div class="tabs">
             <button class="tab-button active" onclick="showTab('home', this)">Home</button>
-            <button class="tab-button" onclick="showTab('items', this)">My Items</button>
+            <!-- THIS IS THE FIX: It is now a direct link that opens in a new tab -->
+            <a href="https://www.pekora.zip/users/16121/profile" target="_blank" rel="noopener noreferrer" class="tab-button">My Items</a>
             <button class="tab-button" onclick="showTab('wishlist', this)">Wishlist</button>
             <a href="https://koromons.vercel.app/player/16121" target="_blank" rel="noopener noreferrer" class="tab-button">Koromons</a>
         </div>
@@ -180,14 +172,7 @@
             </a>
         </div>
 
-        <!-- My Items Tab Content -->
-        <div id="items" class="tab-content">
-             <iframe 
-                class="items-iframe"
-                src="https://www.pekora.zip/internal/collectibles?userId=16121" 
-                title="My Collectible Items on Pekora">
-            </iframe>
-        </div>
+        <!-- My Items Tab Content has been removed because the iframe did not work -->
 
         <!-- Wishlist Tab Content -->
         <div id="wishlist" class="tab-content">
@@ -220,7 +205,10 @@
             // Deactivate all tab buttons
             const buttons = document.querySelectorAll('.tab-button');
             buttons.forEach(button => {
-                button.classList.remove('active');
+                // We only remove 'active' from buttons, not links
+                if (button.tagName === 'BUTTON') {
+                    button.classList.remove('active');
+                }
             });
 
             // Show the selected tab content
