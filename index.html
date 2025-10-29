@@ -19,7 +19,7 @@
             box-sizing: border-box;
         }
 
-        .trade-container {
+        .container {
             background-color: #2b2b2b;
             padding: 30px 40px;
             border-radius: 15px;
@@ -27,6 +27,45 @@
             text-align: center;
             max-width: 800px;
             width: 100%;
+        }
+        
+        /* Tab Navigation Styles */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid #444;
+            margin-bottom: 30px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #aaa;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            text-decoration: none; /* For the 'a' tag */
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px; /* Aligns border with the main border-bottom */
+        }
+        
+        .tab-button:hover {
+            color: #fff;
+        }
+
+        .tab-button.active {
+            color: #ffcc00; /* Vibrant yellow for active tab */
+            border-bottom-color: #ffcc00;
+        }
+
+        /* Content that gets switched */
+        .tab-content {
+            display: none; /* Hidden by default */
+        }
+        .tab-content.active {
+            display: block; /* Shown when active */
         }
 
         .banner-image {
@@ -62,36 +101,119 @@
             background-color: #0056b3; /* Darker blue on hover */
             transform: scale(1.05);
         }
+        
+        /* Wishlist Styles */
+        .wishlist-title {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+        }
+        
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
+        }
+
+        .wishlist-item {
+            background-color: #383838;
+            padding: 15px;
+            border-radius: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        .wishlist-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .wishlist-item p {
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-weight: bold;
+            color: #eee;
+            font-size: 1em;
+            text-transform: capitalize;
+        }
+
 
         /* Responsive adjustments for smaller screens */
         @media (max-width: 600px) {
-            .trade-text {
-                font-size: 2.5em;
-            }
-            .trade-button {
-                font-size: 1.2em;
-                padding: 12px 25px;
-            }
-            .trade-container {
-                padding: 20px;
-            }
+            .trade-text { font-size: 2.5em; }
+            .trade-button { font-size: 1.2em; padding: 12px 25px; }
+            .container { padding: 20px; }
+            .tab-button { font-size: 1em; padding: 12px 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="trade-container">
-        <!-- Your Profile Banner -->
-        <img src="https://cdn.discordapp.com/attachments/1001149457171238983/1433215064281714761/image.png?ex=6903e10b&is=69028f8b&hm=2fd5eb83ffe0043123ff3d0327ab4bc0bcf96845d9f85ef6a1ac671e7a74c732&" alt="My Korone Profile Banner" class="banner-image">
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('home', this)">Home</button>
+            <a href="https://koromons.vercel.app/player/16121" target="_blank" rel="noopener noreferrer" class="tab-button">Koromons</a>
+            <button class="tab-button" onclick="showTab('wishlist', this)">Wishlist</button>
+        </div>
 
-        <!-- The required text -->
-        <h1 class="trade-text">PLEASEE TRADE</h1>
+        <!-- Home Tab Content -->
+        <div id="home" class="tab-content active">
+            <img src="https://cdn.discordapp.com/attachments/1001149457171238983/1433215064281714761/image.png?ex=6903e10b&is=69028f8b&hm=2fd5eb83ffe0043123ff3d0327ab4bc0bcf96845d9f85ef6a1ac671e7a74c732&" alt="My Korone Profile Banner" class="banner-image">
+            <h1 class="trade-text">PLEASEE TRADE</h1>
+            <a href="https://www.pekora.zip/Trade/TradeWindow.aspx?TradePartnerID=16121" class="trade-button" target="_blank" rel="noopener noreferrer">
+                Click Here to Trade!
+            </a>
+        </div>
 
-        <!-- The trade link as a button -->
-        <a href="https://www.pekora.zip/Trade/TradeWindow.aspx?TradePartnerID=16121" class="trade-button" target="_blank" rel="noopener noreferrer">
-            Click Here to Trade!
-        </a>
+        <!-- Wishlist Tab Content -->
+        <div id="wishlist" class="tab-content">
+            <h2 class="wishlist-title">My Wishlist</h2>
+            <div class="wishlist-grid">
+                <div class="wishlist-item">
+                    <img src="https://koromons.vercel.app/_next/image?url=https%3A%2F%2Fwww.pekora.zip%2Fimages%2Fthumbnails%2F8a419e02d420faa8d726783ce4e044717e8a502919637944dfa91ed7e8018ce0.png&w=128&q=75" alt="Subartic Commando">
+                    <p>subartic commando</p>
+                </div>
+                <div class="wishlist-item">
+                    <img src="https://koromons.vercel.app/_next/image?url=https%3A%2F%2Fpekora.zip%2Fimages%2Fthumbnails%2Fb11b093b2bc27afc258dcedc9f4faad78655a6ebe5d63828ea9f3df8387190c0.png&w=128&q=75" alt="Ice Valk">
+                    <p>ice valk</p>
+                </div>
+                <div class="wishlist-item">
+                    <img src="https://koromons.vercel.app/_next/image?url=https%3A%2F%2Fwww.pekora.zip%2Fimages%2Fthumbnails%2Fcf58981745291b2fd30db587ebecd5a192a2a1d7df09b496dfd621ffde65f299.png&w=128&q=75" alt="Projex Madness">
+                    <p>projex madness</p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function showTab(tabId, clickedButton) {
+            // Hide all tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            const selectedContent = document.getElementById(tabId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+            
+            // Activate the clicked button
+            clickedButton.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
