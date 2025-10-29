@@ -32,6 +32,7 @@
         /* Tab Navigation Styles */
         .tabs {
             display: flex;
+            flex-wrap: wrap; /* Allow tabs to wrap on small screens */
             justify-content: center;
             border-bottom: 2px solid #444;
             margin-bottom: 30px;
@@ -41,8 +42,8 @@
             background: none;
             border: none;
             color: #aaa;
-            padding: 15px 25px;
-            font-size: 1.2em;
+            padding: 15px 20px;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             transition: color 0.3s ease, border-bottom-color 0.3s ease;
@@ -78,7 +79,7 @@
         .trade-text {
             font-size: 3.5em;
             font-weight: bold;
-            color: #ffcc00; /* A vibrant yellow */
+            color: #ffcc00;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
             margin: 20px 0;
             letter-spacing: 2px;
@@ -86,7 +87,7 @@
 
         .trade-button {
             display: inline-block;
-            background-color: #007bff; /* A nice blue color */
+            background-color: #007bff;
             color: white;
             padding: 15px 35px;
             text-decoration: none;
@@ -98,7 +99,7 @@
         }
 
         .trade-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
             transform: scale(1.05);
         }
         
@@ -140,14 +141,22 @@
             font-size: 1em;
             text-transform: capitalize;
         }
+        
+        /* Iframe Styles */
+        .items-iframe {
+            width: 100%;
+            height: 65vh; /* 65% of the viewport height */
+            border: none;
+            border-radius: 10px;
+        }
 
 
-        /* Responsive adjustments for smaller screens */
+        /* Responsive adjustments */
         @media (max-width: 600px) {
             .trade-text { font-size: 2.5em; }
             .trade-button { font-size: 1.2em; padding: 12px 25px; }
             .container { padding: 20px; }
-            .tab-button { font-size: 1em; padding: 12px 15px; }
+            .tab-button { font-size: 1em; padding: 12px 10px; }
         }
     </style>
 </head>
@@ -157,8 +166,9 @@
         <!-- Tab Navigation -->
         <div class="tabs">
             <button class="tab-button active" onclick="showTab('home', this)">Home</button>
-            <a href="https://koromons.vercel.app/player/16121" target="_blank" rel="noopener noreferrer" class="tab-button">Koromons</a>
+            <button class="tab-button" onclick="showTab('items', this)">My Items</button>
             <button class="tab-button" onclick="showTab('wishlist', this)">Wishlist</button>
+            <a href="https://koromons.vercel.app/player/16121" target="_blank" rel="noopener noreferrer" class="tab-button">Koromons</a>
         </div>
 
         <!-- Home Tab Content -->
@@ -168,6 +178,15 @@
             <a href="https://www.pekora.zip/Trade/TradeWindow.aspx?TradePartnerID=16121" class="trade-button" target="_blank" rel="noopener noreferrer">
                 Click Here to Trade!
             </a>
+        </div>
+
+        <!-- My Items Tab Content -->
+        <div id="items" class="tab-content">
+             <iframe 
+                class="items-iframe"
+                src="https://www.pekora.zip/internal/collectibles?userId=16121" 
+                title="My Collectible Items on Pekora">
+            </iframe>
         </div>
 
         <!-- Wishlist Tab Content -->
